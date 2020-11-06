@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_item_all_category"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/black"
+    android:focusable="true">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/item_fragment_all_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_8"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test" />
+
+        <TextView
+            android:id="@+id/item_fragment_all_title_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginLeft="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_8"
+            android:layout_marginTop="30dp"
+            android:background="@color/transparent_dark"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_8"
+            android:text=" 8 fall`s presets"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
+
+
+    </FrameLayout>
+
+
+</androidx.cardview.widget.CardView>

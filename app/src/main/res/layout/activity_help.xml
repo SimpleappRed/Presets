@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activitys.ActivityHelp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/black">
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/margin_8"
+            android:src="@drawable/ic_back_right_arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/size_20"
+            tools:ignore="SpUsage"
+            android:textColor="@color/white"
+            android:text="@string/how_to_use_presets"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textSize="@dimen/size_25"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/video_tutorial"/>
+
+
+
+            <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_200"
+                android:layout_margin="@dimen/size_20" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textSize="@dimen/size_25"
+                android:textStyle="bold"
+                tools:ignore="SpUsage"
+                android:textColor="@color/black"
+                android:text="@string/text_guide"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textSize="@dimen/size_20"
+                tools:ignore="SpUsage"
+                android:textColor="@color/black"
+                android:text="@string/text_guide_note"/>
+            <TextView
+                android:id="@+id/txt_lightroom_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="https://play.google.com/store/apps/details?id=com.adobe.lrmobile"/>
+            <TextView
+            android:layout_margin="@dimen/margin_8"
+            android:text="@string/Note"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/size_20"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="this is a test"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:src="@drawable/ic_launcher_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="this is a test"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:src="@drawable/ic_launcher_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="this is a test"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:src="@drawable/ic_launcher_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
