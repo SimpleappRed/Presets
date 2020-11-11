@@ -1,8 +1,6 @@
 package com.wiadevelopers.presets.Activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 
@@ -10,27 +8,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.wiadevelopers.presets.Class.Util;
 import com.wiadevelopers.presets.R;
 import com.wiadevelopers.presets.fragments.FragmentAll;
 import com.wiadevelopers.presets.fragments.FragmentNew;
-import com.wiadevelopers.presets.fragments.Fragmentfavorite;
+import com.wiadevelopers.presets.fragments.FragmentFavorite;
 
 public class ActivityAllPresets extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ImageView setting, help, backDrawer;
     private FragmentAll fragmentAll;
-    private Fragmentfavorite fragmentfavorite;
+    private FragmentFavorite fragmentfavorite;
     private FragmentNew fragmentNew;
     public Context context;
 
@@ -44,7 +37,7 @@ public class ActivityAllPresets extends AppCompatActivity {
         context = getApplicationContext();
 
         fragmentAll = new FragmentAll();
-        fragmentfavorite = new Fragmentfavorite();
+        fragmentfavorite = new FragmentFavorite();
         fragmentNew = new FragmentNew();
 
 

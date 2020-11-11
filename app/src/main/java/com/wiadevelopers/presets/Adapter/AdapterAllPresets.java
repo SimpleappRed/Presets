@@ -4,12 +4,15 @@ package com.wiadevelopers.presets.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.squareup.picasso.Picasso;
 import com.wiadevelopers.presets.Activitys.ActivityDetailsCtegory;
 import com.wiadevelopers.presets.Model.AllPresetsModel;
@@ -42,7 +45,7 @@ public class AdapterAllPresets extends RecyclerView.Adapter<AdapterAllPresets.Al
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull AllPresetsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final AllPresetsViewHolder holder, int position) {
         final AllPresetsModel allPresetsModel = allPresetsModels.get(position);
         holder.textTitle.setText( allPresetsModel.getPresetsAfter().length + " " + allPresetsModel.getPresetCategoryName() );
 
@@ -61,6 +64,22 @@ public class AdapterAllPresets extends RecyclerView.Adapter<AdapterAllPresets.Al
             }
         });
 
+        holder.frameAfterShimmer.setVisibility(View.GONE);
+        holder.shimmerFrameLayout.startShimmer();
+        if (holder.Image!=null){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    holder.shimmerFrameLayout.stopShimmer();
+                    holder.shimmerFrameLayout.setVisibility(View.GONE);
+                    holder.frameAfterShimmer.setVisibility(View.VISIBLE);
+
+
+                }
+            },500);
+        }
+
 
     }
 
@@ -73,6 +92,8 @@ public class AdapterAllPresets extends RecyclerView.Adapter<AdapterAllPresets.Al
         ImageView Image;
         TextView textTitle;
         CardView cardView;
+        ShimmerFrameLayout shimmerFrameLayout;
+        FrameLayout frameAfterShimmer;
 
 
         public AllPresetsViewHolder(@NonNull View itemView) {
@@ -80,6 +101,8 @@ public class AdapterAllPresets extends RecyclerView.Adapter<AdapterAllPresets.Al
             Image = itemView.findViewById(R.id.item_fragment_all_image);
             textTitle = itemView.findViewById(R.id.item_fragment_all_title_banner);
             cardView = itemView.findViewById(R.id.card_item_all_category);
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer);
+            frameAfterShimmer = itemView.findViewById(R.id.frame_after_shimmer);
 
         }
     }

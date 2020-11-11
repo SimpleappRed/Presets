@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_ctegory);
 
+
+
         getIntentMethod();
 
 
@@ -46,6 +51,8 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
                 , presetModel.getPresetsBefore()
                 , presetModel.getPresetsDetailsname());
         recycle_detail_category.setAdapter(adapter);
+
+
 
     }
 
