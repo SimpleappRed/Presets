@@ -55,7 +55,6 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     AdapterDetailPresets adapter;
     public static AllPresetsModel presetModel;
     String url_1 = "";
-    int a = 1;
     TextView category_name, category_description;
 
 
@@ -126,7 +125,7 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
 
                 new AlertDialog.Builder(ActivityDetailsCtegory.this)
                         .setTitle("Permission")
-                        .setMessage("You must have permission to download this")
+                        .setMessage("You need Storage Permission to download DNG")
                         .setPositiveButton("OK", (dialogInterface, i) -> ActivityCompat.requestPermissions(ActivityDetailsCtegory.this,
                                 new String[]{Manifest.permission
                                         .WRITE_EXTERNAL_STORAGE},
@@ -143,9 +142,27 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
 
 
             } else {
-                ActivityCompat.requestPermissions(ActivityDetailsCtegory.this,
+                new AlertDialog.Builder(ActivityDetailsCtegory.this)
+                        .setTitle("Permission")
+                        .setCancelable(false)
+                        .setMessage("You need Storage Permission to download DNG")
+                        .setPositiveButton("OK", (dialogInterface, i) -> ActivityCompat.requestPermissions(ActivityDetailsCtegory.this,
+                                new String[]{Manifest.permission
+                                        .WRITE_EXTERNAL_STORAGE},
+                                PERMISSIONS_MULTIPLE_REQUEST))
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+               /* ActivityCompat.requestPermissions(ActivityDetailsCtegory.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSIONS_MULTIPLE_REQUEST);
+                        PERMISSIONS_MULTIPLE_REQUEST);*/
 
 
             }
