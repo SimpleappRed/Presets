@@ -55,6 +55,7 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     AdapterDetailPresets adapter;
     public static AllPresetsModel presetModel;
     String url_1 = "";
+    int a = 1;
     TextView category_name, category_description;
 
 
