@@ -9,6 +9,15 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/fontForAllTextInApp</item>
     </style>
+
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">#a2a6ab</item>
+        <item name="android:textColor">#a2a6ab</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="fontForAllTextInApp" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>

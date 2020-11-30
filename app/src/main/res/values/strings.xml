@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Presets</string>
+    <string name="app_name">Shine</string>
     <string name="All_Presets">All Presets</string>
     <string name="New_Presets">New Presets</string>
     <string name="Favorite">Favorite</string>
     <string name="video_tutorial">Video Tutorial</string>
     <string name="text_guide">Text Guide</string>
     <string name="how_to_use_presets">How to use presets</string>
-    <string name="text_guide_note">1. after installing this app download and install Adobe Lightroom app from Google play as well </string>
+    <string name="text_guide_note">1. after installing SHINE download and install Adobe Lightroom app from Google play as well </string>
     <string name="install_lightroom">Install Lightroom</string>
     <string name="Note">Note!Without installation of Adobe Lightroom you cannot use the presets.</string>
     <string name="fall">FALL</string>
@@ -21,5 +21,26 @@
     <string name="about_us">About us</string>
     <string name="contact">contact us and suggest your preset</string>
     <string name="follow_us">Follow us</string>
+    <string name="unlock_preset_content"> Watch a video ad to unlock  this Preset</string>
+    <string name="unlock_preset_title">Unlock Preset</string>
+    <string name="note_2">2. choose a preset in SHINE and tap the DNG button.after see AD you`ll see a caption \'Adding a photo to All Photos Album\'. you will also get a success notification.</string>
+    <string name="note_3">3. Then open lightroom and open the preset.Click on this icon and it open s a menu for you.Then click on Copy Setting</string>
+    <string name="note_4">4. Then open your photo and click on Paste Setting.</string>
+    <string name="note_5">5. That`s how it`s easy to create an awesome photo</string>
+    <string name="not_6">How to Save Preset in Lightroom Forever</string>
+    <string name="note_7">To fast apply the presets you copied before,save them as follows:</string>
+    <string name="note_8">1. In the right upper corner ,tap a button:Choose \"Create preset\".</string>
+    <string name="note_9">2. Write preset name in \'Preset Name\' field and mark all items,except of \'tools\',\'option\'and\'geometry\' (as on photo):</string>
+    <string name="note_10">Congrats! Your preset is saved!</string>
+    <string name="note_11">to apply this preset to your photo in the future ,follow:</string>
+    <string name="note_12">Open your photo ,and choose the \'Presets\'.</string>
+    <string name="note_13">Choose \'User Presets\' category:</string>
+    <string name="note_14">choose one of the saved presets from the list and apply it to your photo in one click.</string>
+    <string name="note_15">you can save all copied presets in the same way to avoid copying the setting all the time.</string>
+    <string name="note_16">All presets will be saved in the \'User Presets \' folder.we recommend:name your presets in the same way as in the app.</string>
+    <string name="share_text"></string>
+    <string name="settings_aboutus_invite_a_friend_via"></string>
+    <string name="send_email">Send email...</string>
+
 
 </resources>

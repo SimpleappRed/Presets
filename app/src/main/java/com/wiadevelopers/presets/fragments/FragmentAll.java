@@ -12,7 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.gson.Gson;
-import com.wiadevelopers.presets.Activitys.ActivityAllPresets;
 import com.wiadevelopers.presets.Adapter.AdapterAllPresets;
 import com.wiadevelopers.presets.Class.MySingleton;
 import com.wiadevelopers.presets.Model.AllPresetsModel;
@@ -34,6 +33,7 @@ public class FragmentAll extends Fragment {
     AdapterAllPresets adapterAllPresets;
     List<AllPresetsModel> modelList = new ArrayList<>();
 
+
     public FragmentAll() {
 
     }
@@ -49,6 +49,10 @@ public class FragmentAll extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all, container, false);
         recycleFragmentAll = view.findViewById(R.id.recycle_fragment_all);
         recycleFragmentAll.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycleFragmentAll.setHasFixedSize(true);
+       recycleFragmentAll.setItemViewCacheSize(20);
+        recycleFragmentAll.setAlwaysDrawnWithCacheEnabled(true);
+        recycleFragmentAll.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         adapterAllPresets = new AdapterAllPresets(getActivity(), modelList);
         recycleFragmentAll.setAdapter(adapterAllPresets);
         getPresetsInfoFromServer();
@@ -89,7 +93,7 @@ public class FragmentAll extends Fragment {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Not connected to the Internet", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
             }

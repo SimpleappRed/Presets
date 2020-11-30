@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="ltr"
     tools:context=".Activitys.ActivityHelp">
 
     <RelativeLayout
@@ -13,20 +14,20 @@
         android:background="@color/black">
 
         <ImageView
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:id="@+id/img_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:padding="@dimen/margin_8"
-            android:src="@drawable/ic_back_right_arrow"/>
+            android:src="@drawable/ic_arrow_back_ios"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
-            android:textSize="@dimen/size_20"
+            android:textSize="@dimen/size_25"
             tools:ignore="SpUsage"
             android:textColor="@color/white"
             android:text="@string/how_to_use_presets"/>
@@ -35,9 +36,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@color/black"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:padding="@dimen/size_13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -48,15 +51,16 @@
                 android:layout_margin="@dimen/margin_8"
                 android:textSize="@dimen/size_25"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/video_tutorial"/>
 
 
 
-            <VideoView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_200"
-                android:layout_margin="@dimen/size_20" />
+           <ImageView
+               android:id="@+id/help_video_create"
+               android:layout_gravity="center"
+               android:layout_width="200dp"
+               android:layout_height="@dimen/size_200"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +68,7 @@
                 android:textSize="@dimen/size_25"
                 android:textStyle="bold"
                 tools:ignore="SpUsage"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/text_guide"/>
             <TextView
                 android:layout_width="match_parent"
@@ -72,7 +76,7 @@
                 android:layout_margin="@dimen/margin_8"
                 android:textSize="@dimen/size_20"
                 tools:ignore="SpUsage"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/text_guide_note"/>
             <TextView
                 android:id="@+id/txt_lightroom_link"
@@ -81,47 +85,223 @@
                 android:layout_margin="@dimen/margin_8"
                 android:autoLink="web"
                 android:linksClickable="true"
-                android:text="https://play.google.com/store/apps/details?id=com.adobe.lrmobile"/>
+                android:text="Install Lightroom"
+                android:textColor="@color/blue_light"
+                android:textStyle="bold"/>
             <TextView
             android:layout_margin="@dimen/margin_8"
             android:text="@string/Note"
             android:layout_width="match_parent"
             android:textSize="@dimen/size_20"
-            android:textColor="@color/black"
+                android:textColor="@color/white"
             android:layout_height="wrap_content"/>
             <TextView
-                android:layout_margin="@dimen/margin_8"
-                android:text="this is a test"
+                android:text="@string/note_2"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/size_20"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_8"
                 android:layout_height="wrap_content"/>
             <ImageView
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/txt_help_1"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <!--<ImageView
+                android:id="@+id/txt_help_2"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>-->
+           <!-- <ImageView
+                android:id="@+id/txt_help_3"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="150dp"/>-->
+           <!-- <ImageView
+                android:id="@+id/txt_help_4"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="150dp"/>-->
+
+            <TextView
+                android:text="@string/note_3"
                 android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_8"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/txt_help_5"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <ImageView
+                android:id="@+id/txt_help_6"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_4"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/txt_help_7"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_5"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/size_40"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:text="@string/not_6"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_25"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textSize="@dimen/size_25"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="@string/video_tutorial"/>
+            <ImageView
+                android:id="@+id/help_video_save"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="@dimen/size_200"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textSize="@dimen/size_25"
+                android:textStyle="bold"
+                tools:ignore="SpUsage"
+                android:textColor="@color/white"
+                android:text="@string/text_guide"/>
+
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_7"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_margin="@dimen/margin_8"
-                android:text="this is a test"
+                android:text="@string/note_8"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/size_20"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
             <ImageView
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/txt_help_8"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_9"
                 android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/txt_help_9"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_10"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_margin="@dimen/margin_8"
-                android:text="this is a test"
+                android:text="@string/note_11"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/size_20"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_12"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
             <ImageView
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/txt_help_10"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_13"
                 android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/txt_help_11"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_14"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_15"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="@dimen/margin_8"
+                android:text="@string/note_16"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/size_20"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/size_40"
+                android:layout_height="wrap_content"/>
+
+
+
+
 
 
 

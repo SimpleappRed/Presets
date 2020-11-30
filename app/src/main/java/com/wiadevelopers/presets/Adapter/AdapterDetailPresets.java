@@ -2,13 +2,21 @@ package com.wiadevelopers.presets.Adapter;
 
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +24,17 @@ import android.widget.Toast;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.squareup.picasso.Picasso;
 import com.wiadevelopers.presets.R;
+import com.wiadevelopers.presets.callback.SetOnClickListener;
+
+import org.xml.sax.InputSource;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,15 +44,17 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
     String[] modelListAfter;
     String[] modelListBefore;
     String titleDetails;
-    int clickFavorite;
+    private SetOnClickListener setOnClickListener;
 
 
-    public AdapterDetailPresets(Context context, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String titleDetails) {
+    public AdapterDetailPresets(Context context, SetOnClickListener setOnClickListener, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String presetsDetailsname, String titleDetails) {
         this.context = context;
         this.modelListDng = modelListDng;
         this.modelListAfter = modelListAfter;
         this.modelListBefore = modelListBefore;
+        this.setOnClickListener = setOnClickListener;
         this.titleDetails = titleDetails;
+
     }
 
     @NonNull
@@ -47,11 +66,13 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final int p = position + 1;
-        holder.title.setText(titleDetails + "  " + p);
+        final String titleAndPosition = titleDetails + "  " + p;
+        holder.title.setText(titleAndPosition);
         Picasso.with(context).load(modelListAfter[position]).into(holder.image);
         Picasso.with(context).load(modelListBefore[position]).into(holder.imgBefore);
+
 
         holder.cardShowAfterShimmer.setVisibility(View.GONE);
         holder.shimmerFrameLayout.startShimmer();
@@ -66,7 +87,7 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
 
 
                 }
-            }, 500);
+            }, 0);
         }
 
 
@@ -82,41 +103,35 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
             }
         });
 
-        final int finalPosition1 = position;
+
         holder.dngDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, modelListDng[finalPosition1] + " Is Downloaded", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, modelListDng[finalPosition1] + " Is Downloaded", Toast.LENGTH_SHORT).show();
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.custom_dialog);
+                Button btnPositive = dialog.findViewById(R.id.dialog_positive_btn);
+                Button btnCancel = dialog.findViewById(R.id.dialog_cancel_btn);
+                btnPositive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        setOnClickListener.onClick(modelListDng[position]);
+
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
             }
         });
-
-
-        holder.favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (clickFavorite == 0){
-                    holder.favorite.setImageResource(R.drawable.favorite_border_white);
-                    clickFavorite = 1;
-                }else if (clickFavorite == 1){
-                    holder.favorite.setImageResource(R.drawable.favorite_white);
-                    clickFavorite = 0;
-
-                }
-
-
-
-
-                String textForSaveFavorite = titleDetails + "  " + p;
-                SharedPreferences sharedPreferences = context.getSharedPreferences("Save_User_Favorite", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("itemName", textForSaveFavorite);
-                editor.apply();
-            }
-
-        });
-
     }
+
     @Override
     public int getItemCount() {
         return modelListDng.length;
@@ -124,7 +139,7 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image, touch, favorite, imgBefore;
+        ImageView image, touch, imgBefore;
         TextView title, dngDownload;
         CardView cardShowAfterShimmer;
         ShimmerFrameLayout shimmerFrameLayout;
@@ -134,11 +149,28 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
             imgBefore = itemView.findViewById(R.id.item_image_before);
             image = itemView.findViewById(R.id.item_image);
             touch = itemView.findViewById(R.id.item_touch);
-            favorite = itemView.findViewById(R.id.item_favorite);
             title = itemView.findViewById(R.id.item_title);
             dngDownload = itemView.findViewById(R.id.item_dng_download);
             cardShowAfterShimmer = itemView.findViewById(R.id.card_show_after_shimmer);
             shimmerFrameLayout = itemView.findViewById(R.id.shimmer);
         }
     }
+
+   /* private void shareImage(Bitmap bitmap) {
+        String imgBitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "title", null);
+        Uri imgBitmapUri = Uri.parse(imgBitmapPath);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imgBitmapUri);
+        shareIntent.setPackage("com.adobe.lrmobile");
+        // context.startActivity(Intent.createChooser(shareIntent, "share image using"));
+
+        try {
+            context.startActivity(shareIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(context, "your app not install", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }*/
 }

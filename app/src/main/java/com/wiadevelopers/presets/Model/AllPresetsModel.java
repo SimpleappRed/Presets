@@ -30,6 +30,10 @@ public class AllPresetsModel implements Serializable {
 
     }
 
+    public AllPresetsModel(int id) {
+        this.id = id;
+    }
+
     public AllPresetsModel(int id, String presetCategoryName, String photoForCategoryBackground) {
         this.id = id;
         this.presetCategoryName = presetCategoryName;

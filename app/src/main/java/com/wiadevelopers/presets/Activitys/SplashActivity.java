@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -14,10 +15,18 @@ import com.wiadevelopers.presets.R;
 public class SplashActivity extends AppCompatActivity {
     ImageView splashLogo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+
+
+
+
+
         splashLogo = findViewById(R.id.splash_logo);
 
         YoYo.with(Techniques.ZoomIn)
@@ -33,6 +42,6 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
 
             }
-        },1000);
+        },3000);
     }
 }

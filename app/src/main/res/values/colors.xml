@@ -10,5 +10,10 @@
     <color name="grey900">#212121</color>
     <color name="setting_layout">#0E101B</color>
     <color name="transparent_dark">#8D150101</color>
+    <color name="blue_dark">#074AF4</color>
+    <color name="blue_light">#10A7EC</color>
+    <color name="grey_light">#CAC4C4</color>
+    <color name="yellow_dark">#FFD600</color>
+    <color name="red">#f44336</color>
 
 </resources>
