@@ -40,15 +40,6 @@ public class ActivitySetting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
 
-
-
-       //Admob_banner
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-
         findViewMethod();
         setOnClickMethod();
 

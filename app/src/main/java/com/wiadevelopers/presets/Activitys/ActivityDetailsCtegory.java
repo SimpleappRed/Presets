@@ -23,8 +23,11 @@ import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,7 @@ import com.wiadevelopers.presets.Adapter.AdapterDetailPresets;
 import com.wiadevelopers.presets.Class.MySingleton;
 import com.wiadevelopers.presets.Model.AllPresetsModel;
 import com.wiadevelopers.presets.R;
+import com.wiadevelopers.presets.callback.SetAdListener;
 import com.wiadevelopers.presets.callback.SetOnClickListener;
 
 import org.json.JSONObject;
@@ -67,9 +71,10 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     public static AllPresetsModel presetModel;
     String url_1 = "";
     TextView category_name, category_description;
-    Button showAd, loadAd;
     private RewardedAd rewardedAd;
     private static final String TAG = "ActivityDetailsCtegory";
+
+
 
 
     @Override
@@ -77,27 +82,6 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_ctegory);
 
-
-        loadAd = findViewById(R.id.loadAd);
-        showAd = findViewById(R.id.showAd);
-
-        loadAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadAd(view);
-
-            }
-        });
-        showAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAd(view);
-
-            }
-        });
-
-
-        // -------------------------------------------------------
 
 
         getIntentMethod();
@@ -108,16 +92,29 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
         recycle_detail_category.setItemViewCacheSize(20);
         recycle_detail_category.setAlwaysDrawnWithCacheEnabled(true);
         recycle_detail_category.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        adapter = new AdapterDetailPresets(ActivityDetailsCtegory.this, new SetOnClickListener() {
+        adapter = new AdapterDetailPresets(ActivityDetailsCtegory.this, new SetAdListener() {
+            @Override
+            public void onClick(View view) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadAd(view);
+                    }
+                }, 5000);
 
+                showAd(view);
 
+            }
+        }, new SetOnClickListener() {
             @Override
             public void onClick(String url) {
                 url_1 = url;
                 Log.i("ttttt", "first");
 
+                    //checkPermission();
 
-                checkPermission();
+
             }
         }
                 , presetModel.getPresetsDNG_Format()
@@ -428,37 +425,55 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     }
 
     public void showAd(View view) {
-        if (this.rewardedAd.isLoaded()) {
-            RewardedAdCallback callback = new RewardedAdCallback() {
-                @Override
-                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                    Log.i(TAG, "onUserEarnedReward");
-                }
+        try {
+            if (this.rewardedAd.isLoaded()) {
+                RewardedAdCallback callback = new RewardedAdCallback() {
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        Log.i(TAG, "onUserEarnedReward");
+                        checkPermission();
+                    }
 
-                @Override
-                public void onRewardedAdOpened() {
-                    super.onRewardedAdOpened();
-                    Log.i(TAG, "onRewardedAdOpened");
-                }
+                    @Override
+                    public void onRewardedAdOpened() {
+                        super.onRewardedAdOpened();
+                        Log.i(TAG, "onRewardedAdOpened");
+                    }
 
-                @Override
-                public void onRewardedAdClosed() {
-                    super.onRewardedAdClosed();
-                    Log.i(TAG, "onRewardedAdClosed");
-                }
+                    @Override
+                    public void onRewardedAdClosed() {
+                        super.onRewardedAdClosed();
+                        Log.i(TAG, "onRewardedAdClosed");
+                    }
 
-                @Override
-                public void onRewardedAdFailedToShow(AdError adError) {
-                    super.onRewardedAdFailedToShow(adError);
-                    Log.i(TAG, "onRewardedAdFailedToShow");
-                }
+                    @Override
+                    public void onRewardedAdFailedToShow(AdError adError) {
+                        super.onRewardedAdFailedToShow(adError);
+                        Log.i(TAG, "onRewardedAdFailedToShow");
+                    }
 
-            };
-            this.rewardedAd.show(this,callback);
+                };
+                this.rewardedAd.show(this, callback);
 
-        } else {
-            Log.i(TAG, "ad not loaded");
+
+            } else {
+                Log.i(TAG, "ad not loaded");
+            }
+
+        } catch (Exception e) {
+            LayoutInflater layoutInflater = getLayoutInflater();
+            View v2 = layoutInflater.inflate(R.layout.toastcustom, (ViewGroup) findViewById(R.id.lnr));
+            TextView t;
+            t = v2.findViewById(R.id.toast_description);
+            t.setText(R.string.load_toast_decription);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_LONG);
+            //toast.setGravity(Gravity.NO_GRAVITY, 0, 160);
+            toast.setView(v2);
+            toast.show();
+
         }
+
 
     }
 

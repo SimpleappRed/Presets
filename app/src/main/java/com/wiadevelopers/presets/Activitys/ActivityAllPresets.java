@@ -67,6 +67,7 @@ public class ActivityAllPresets extends AppCompatActivity {
         findViewMethod();
         setOnClickMethod();
         setUpViewPager(viewPager);
+
         sharedPreferences = getSharedPreferences("shared_prefs", MODE_PRIVATE);
         boolean showHelp = sharedPreferences.getBoolean("saveTapTargetView", false);
         if (showHelp==false) {

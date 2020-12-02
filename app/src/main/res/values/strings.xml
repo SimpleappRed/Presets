@@ -41,6 +41,8 @@
     <string name="share_text"></string>
     <string name="settings_aboutus_invite_a_friend_via"></string>
     <string name="send_email">Send email...</string>
+    <string name="load_toast_decription">Reward AD not load.Try again please...</string>
+
 
 
 </resources>

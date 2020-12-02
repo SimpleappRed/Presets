@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.squareup.picasso.Picasso;
 import com.wiadevelopers.presets.R;
+import com.wiadevelopers.presets.callback.SetAdListener;
 import com.wiadevelopers.presets.callback.SetOnClickListener;
 
 import org.xml.sax.InputSource;
@@ -45,15 +46,17 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
     String[] modelListBefore;
     String titleDetails;
     private SetOnClickListener setOnClickListener;
+    private SetAdListener setAdListener;
 
 
-    public AdapterDetailPresets(Context context, SetOnClickListener setOnClickListener, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String presetsDetailsname, String titleDetails) {
+    public AdapterDetailPresets(Context context,SetAdListener setAdListene ,SetOnClickListener setOnClickListener, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String presetsDetailsname, String titleDetails) {
         this.context = context;
         this.modelListDng = modelListDng;
         this.modelListAfter = modelListAfter;
         this.modelListBefore = modelListBefore;
         this.setOnClickListener = setOnClickListener;
         this.titleDetails = titleDetails;
+        this.setAdListener = setAdListene;
 
     }
 
@@ -117,6 +120,7 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
                     public void onClick(View view) {
                         dialog.dismiss();
                         setOnClickListener.onClick(modelListDng[position]);
+                        setAdListener.onClick(view);
 
                     }
                 });
