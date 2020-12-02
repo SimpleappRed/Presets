@@ -10,10 +10,16 @@ import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.wiadevelopers.presets.R;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView splashLogo;
+
 
 
     @Override
@@ -21,10 +27,22 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        //initialize AD
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
 
 
 
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
 
 
         splashLogo = findViewById(R.id.splash_logo);
@@ -42,6 +60,6 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
 
             }
-        },3000);
+        }, 3000);
     }
 }

@@ -24,6 +24,19 @@
             android:textColor="@color/white"
             android:textSize="@dimen/size_25"
             android:textStyle="bold" />
+        <Button
+            android:text="loadAd"
+            android:id="@+id/loadAd"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+           android:layout_toLeftOf="@+id/loadAd"
+            android:text="showAd"
+            android:id="@+id/showAd"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
 

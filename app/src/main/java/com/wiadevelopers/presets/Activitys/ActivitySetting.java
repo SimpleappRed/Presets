@@ -16,11 +16,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.wiadevelopers.presets.Class.SettingsHelper;
 import com.wiadevelopers.presets.R;
 
 public class ActivitySetting extends AppCompatActivity {
     ImageView imgBack;
+    private AdView mAdView;
+
+
     private MaterialRippleLayout theme,followUs,rate,inviteFriend,otherApps,contactUs,privacyPolicy;
 
 
@@ -29,6 +38,17 @@ public class ActivitySetting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+
+
+
+       //Admob_banner
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+
         findViewMethod();
         setOnClickMethod();
 

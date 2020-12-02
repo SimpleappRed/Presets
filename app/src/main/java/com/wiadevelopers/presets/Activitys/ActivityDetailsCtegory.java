@@ -1,5 +1,6 @@
 package com.wiadevelopers.presets.Activitys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,11 +19,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.wiadevelopers.presets.Adapter.AdapterAllPresets;
 import com.wiadevelopers.presets.Adapter.AdapterDetailPresets;
 import com.wiadevelopers.presets.Class.MySingleton;
@@ -56,6 +67,9 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     public static AllPresetsModel presetModel;
     String url_1 = "";
     TextView category_name, category_description;
+    Button showAd, loadAd;
+    private RewardedAd rewardedAd;
+    private static final String TAG = "ActivityDetailsCtegory";
 
 
     @Override
@@ -64,8 +78,29 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
         setContentView(R.layout.activity_details_ctegory);
 
 
-        getIntentMethod();
+        loadAd = findViewById(R.id.loadAd);
+        showAd = findViewById(R.id.showAd);
 
+        loadAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadAd(view);
+
+            }
+        });
+        showAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAd(view);
+
+            }
+        });
+
+
+        // -------------------------------------------------------
+
+
+        getIntentMethod();
 
         recycle_detail_category = findViewById(R.id.recycle_detail_category);
         recycle_detail_category.setLayoutManager(new LinearLayoutManager(ActivityDetailsCtegory.this));
@@ -80,6 +115,8 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
             public void onClick(String url) {
                 url_1 = url;
                 Log.i("ttttt", "first");
+
+
                 checkPermission();
             }
         }
@@ -366,6 +403,62 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
             Toast.makeText(this, "your app not install", Toast.LENGTH_SHORT).show();
         }
 
+
+    }
+
+    public void loadAd(View view) {
+        this.rewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
+        RewardedAdLoadCallback callback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdFailedToLoad(LoadAdError loadAdError) {
+                super.onRewardedAdFailedToLoad(loadAdError);
+                Log.i(TAG, "onRewardedAdFailedToLoad");
+
+            }
+
+            @Override
+            public void onRewardedAdLoaded() {
+                super.onRewardedAdLoaded();
+                Log.i(TAG, "onRewardedAdLoaded");
+
+            }
+        };
+        this.rewardedAd.loadAd(new AdRequest.Builder().build(), callback);
+
+    }
+
+    public void showAd(View view) {
+        if (this.rewardedAd.isLoaded()) {
+            RewardedAdCallback callback = new RewardedAdCallback() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    Log.i(TAG, "onUserEarnedReward");
+                }
+
+                @Override
+                public void onRewardedAdOpened() {
+                    super.onRewardedAdOpened();
+                    Log.i(TAG, "onRewardedAdOpened");
+                }
+
+                @Override
+                public void onRewardedAdClosed() {
+                    super.onRewardedAdClosed();
+                    Log.i(TAG, "onRewardedAdClosed");
+                }
+
+                @Override
+                public void onRewardedAdFailedToShow(AdError adError) {
+                    super.onRewardedAdFailedToShow(adError);
+                    Log.i(TAG, "onRewardedAdFailedToShow");
+                }
+
+            };
+            this.rewardedAd.show(this,callback);
+
+        } else {
+            Log.i(TAG, "ad not loaded");
+        }
 
     }
 
