@@ -49,7 +49,7 @@ public class AdapterDetailPresets extends RecyclerView.Adapter<AdapterDetailPres
     private SetAdListener setAdListener;
 
 
-    public AdapterDetailPresets(Context context,SetAdListener setAdListene ,SetOnClickListener setOnClickListener, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String presetsDetailsname, String titleDetails) {
+    public AdapterDetailPresets(Context context, SetAdListener setAdListene, SetOnClickListener setOnClickListener, String[] modelListDng, String[] modelListAfter, String[] modelListBefore, String presetsDetailsname, String titleDetails) {
         this.context = context;
         this.modelListDng = modelListDng;
         this.modelListAfter = modelListAfter;

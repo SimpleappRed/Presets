@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -73,15 +74,13 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
     TextView category_name, category_description;
     private RewardedAd rewardedAd;
     private static final String TAG = "ActivityDetailsCtegory";
-
-
+     Dialog dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_ctegory);
-
 
 
         getIntentMethod();
@@ -95,15 +94,17 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
         adapter = new AdapterDetailPresets(ActivityDetailsCtegory.this, new SetAdListener() {
             @Override
             public void onClick(View view) {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                 dialog = new Dialog(ActivityDetailsCtegory.this);
+                dialog.setContentView(R.layout.load_ad_dialog);
+                Button cancelButton = dialog.findViewById(R.id.dialog_cancel_btn);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        loadAd(view);
+                    public void onClick(View view) {
+                        dialog.cancel();
                     }
-                }, 5000);
-
-                showAd(view);
+                });
+                dialog.show();
+                loadAd(view);
 
             }
         }, new SetOnClickListener() {
@@ -112,7 +113,7 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
                 url_1 = url;
                 Log.i("ttttt", "first");
 
-                    //checkPermission();
+                //checkPermission();
 
 
             }
@@ -417,6 +418,9 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
             public void onRewardedAdLoaded() {
                 super.onRewardedAdLoaded();
                 Log.i(TAG, "onRewardedAdLoaded");
+                dialog.cancel();
+                showAd();
+
 
             }
         };
@@ -424,54 +428,40 @@ public class ActivityDetailsCtegory extends AppCompatActivity {
 
     }
 
-    public void showAd(View view) {
-        try {
-            if (this.rewardedAd.isLoaded()) {
-                RewardedAdCallback callback = new RewardedAdCallback() {
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        Log.i(TAG, "onUserEarnedReward");
-                        checkPermission();
-                    }
+    public void showAd() {
 
-                    @Override
-                    public void onRewardedAdOpened() {
-                        super.onRewardedAdOpened();
-                        Log.i(TAG, "onRewardedAdOpened");
-                    }
+        if (this.rewardedAd.isLoaded()) {
+            RewardedAdCallback callback = new RewardedAdCallback() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    Log.i(TAG, "onUserEarnedReward");
+                    checkPermission();
+                }
 
-                    @Override
-                    public void onRewardedAdClosed() {
-                        super.onRewardedAdClosed();
-                        Log.i(TAG, "onRewardedAdClosed");
-                    }
+                @Override
+                public void onRewardedAdOpened() {
+                    super.onRewardedAdOpened();
+                    Log.i(TAG, "onRewardedAdOpened");
+                }
 
-                    @Override
-                    public void onRewardedAdFailedToShow(AdError adError) {
-                        super.onRewardedAdFailedToShow(adError);
-                        Log.i(TAG, "onRewardedAdFailedToShow");
-                    }
+                @Override
+                public void onRewardedAdClosed() {
+                    super.onRewardedAdClosed();
+                    Log.i(TAG, "onRewardedAdClosed");
+                }
 
-                };
-                this.rewardedAd.show(this, callback);
+                @Override
+                public void onRewardedAdFailedToShow(AdError adError) {
+                    super.onRewardedAdFailedToShow(adError);
+                    Log.i(TAG, "onRewardedAdFailedToShow");
+                }
+
+            };
+            this.rewardedAd.show(this, callback);
 
 
-            } else {
-                Log.i(TAG, "ad not loaded");
-            }
-
-        } catch (Exception e) {
-            LayoutInflater layoutInflater = getLayoutInflater();
-            View v2 = layoutInflater.inflate(R.layout.toastcustom, (ViewGroup) findViewById(R.id.lnr));
-            TextView t;
-            t = v2.findViewById(R.id.toast_description);
-            t.setText(R.string.load_toast_decription);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setDuration(Toast.LENGTH_LONG);
-            //toast.setGravity(Gravity.NO_GRAVITY, 0, 160);
-            toast.setView(v2);
-            toast.show();
-
+        } else {
+            Log.i(TAG, "ad not loaded");
         }
 
 

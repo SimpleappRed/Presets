@@ -54,13 +54,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.balysv:material-ripple:1.0.2'
     //Ad Mob-----------------------
-    dependencies {
-        implementation 'com.google.android.gms:play-services-ads:19.5.0'
-    }
-
-
-   
-
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,13 +26,17 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public class FragmentAll extends Fragment {
     private RecyclerView recycleFragmentAll;
     AdapterAllPresets adapterAllPresets;
     List<AllPresetsModel> modelList = new ArrayList<>();
+
 
 
     public FragmentAll() {
@@ -48,12 +53,16 @@ public class FragmentAll extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all, container, false);
         recycleFragmentAll = view.findViewById(R.id.recycle_fragment_all);
-        recycleFragmentAll.setLayoutManager(new LinearLayoutManager(getActivity()));
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+        gridLayoutManager.invalidateSpanAssignments();
+        recycleFragmentAll.setLayoutManager(gridLayoutManager);
         recycleFragmentAll.setHasFixedSize(true);
-       recycleFragmentAll.setItemViewCacheSize(20);
+        recycleFragmentAll.setItemViewCacheSize(20);
         recycleFragmentAll.setAlwaysDrawnWithCacheEnabled(true);
         recycleFragmentAll.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         adapterAllPresets = new AdapterAllPresets(getActivity(), modelList);
+        recycleFragmentAll.setItemAnimator(new DefaultItemAnimator());
         recycleFragmentAll.setAdapter(adapterAllPresets);
         getPresetsInfoFromServer();
         return view;
@@ -93,12 +102,12 @@ public class FragmentAll extends Fragment {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(),"Not connected to the Internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Not connected to the Internet", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
             }
         };
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null,listener,errorListener);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, listener, errorListener);
         MySingleton.getInstance(getActivity()).addToRequestQueue(request);
 
 
